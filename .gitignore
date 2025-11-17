@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# experiments
+src/app/(users)/profile/**
+src/app/create-vote/*
+src/components/ProfileHeader.tsx
+src/components/VotingHistoryCard.tsx
+src/components/CreatedVoteCard.tsx
+

@@ -1,7 +1,7 @@
 import { Input } from "@/components/ui/input"
 import { SearchIcon } from 'lucide-react';
-import Dropdown from '../../components/DropDown';
-import CardBook from '../../components/CardBook';
+import Dropdown from "@/components/DropDown";
+import CardBook from "@/components/CardBook";
 
 const BrowseBooks = () => {
     const categories = ["All Genres", "Fiction", "Non-Fiction", "Science", "History", "Technology", "Education", "Literature"];
@@ -27,10 +27,10 @@ const BrowseBooks = () => {
                     <div className="flex w-full items-center mt-6 justify-between">
                         <Dropdown
                             label="All Category"
+                            className="bg-background hover:bg-background hover:border-primary text-neutral-600 hover:text-primary border shadow-none"
                             DropdownItems={categories}
                         />
                         <Dropdown
-                            className="bg-primary text-white"
                             label="Sort By"
                             DropdownItems={sortOptions}
                         />
@@ -39,7 +39,7 @@ const BrowseBooks = () => {
                 <section id="books" className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-10">
                     {Array.from({ length: 6 }, (_, index) => (
                         <CardBook
-                            key={`book-${index}`}
+                            key={`book-${index.toString}`}
                             title="James Humility Consert Higghiels"
                             author="Jamse Arthur"
                             category="Horror"

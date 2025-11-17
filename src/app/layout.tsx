@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Scriptura",
-  description: "Scriptura Where Readers Decide What’s Next",
+  title: "BookVote",
+  description: "BookVote Where Readers Decide What’s Next",
 };
 
 export default function RootLayout({
@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-dvh`}
       >
         <Navbar />
-        <main className="flex-1 bg-background">
+        <main className="flex-1 bg-white">
           {children}
         </main>
         <Footer />

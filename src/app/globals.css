@@ -78,7 +78,7 @@
   --sidebar-ring: hsl(180 66% 45%);
   --sb-track-color: hsl(0 0% 95%);
   --sb-thumb-color: var(--color-primary);
-  --sb-size: 14px;
+  --sb-size: 6px;
 }
 
 .dark {
@@ -119,6 +119,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -134,7 +135,6 @@
 
   body::-webkit-scrollbar-thumb {
     background: var(--sb-thumb-color);
-    border-radius: 3px;
   }
 
   @supports not selector(::-webkit-scrollbar) {

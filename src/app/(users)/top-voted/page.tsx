@@ -1,5 +1,5 @@
 import { Trophy } from 'lucide-react';
-import CardTopLeaderBoard from '../../components/CardTopLeaderBoard';
+import CardTopLeaderBoard from '@/components/CardTopLeaderBoard';
 
 const OrnamentBackground = () => (
     <div
@@ -32,7 +32,7 @@ const TopVoted = () => {
 
                 {[1, 2, 3, 4, 5].map((book, idx) => (
                     <CardTopLeaderBoard
-                        key={idx}
+                        key={book.toString()}
                         rank={book}
                         title='The Midnight Library'
                         author='Alif Januantara Prima'

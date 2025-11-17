@@ -23,7 +23,7 @@ export default function Dropdown({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" className={className}>
+        <Button variant="default" className={className}>
           {label}
           <ChevronDownIcon
             className="-me-1 opacity-60"
