@@ -12,8 +12,6 @@ interface CardBookProps {
 }
 
 const CardBook = (props: CardBookProps) => {
-
-
     return (
         <div className="card rounded-3xl max-sm:border bg-white md:shadow-sm overflow-hidden">
 
@@ -24,6 +22,7 @@ const CardBook = (props: CardBookProps) => {
                         alt={props.title}
                         width={180}
                         height={0}
+                        loading='lazy'
                         className='h-[120px] md:h-auto max-sm:w-auto bg-cover'
                     />
                 </div>
@@ -50,6 +49,7 @@ const CardBook = (props: CardBookProps) => {
                             : props.title
                         }
                     </h4>
+
                     <h5 className='text-xs md:text-sm mt-2 text-neutral-400'>by <span className='text-neutral-500 font-semibold'>{props.author}</span></h5>
 
                     <div className="card-footer flex mt-6 gap-3">
