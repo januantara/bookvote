@@ -26,6 +26,7 @@ const NewArrivalCard = ({
                         src={imageUrl}
                         alt={title}
                         fill
+                        sizes="(max-width: 768px) 100vw, 300px"
                         className="object-contain group-hover:scale-105 transition-transform p-8 duration-300"
                     />
                 </div>

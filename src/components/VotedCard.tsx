@@ -26,12 +26,13 @@ const VotedCard = ({
         <div className="group bg-white border border-neutral-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300">
             {/* Image Container */}
             <div className="relative flex overflow-hidden bg-neutral-50 h-56 p-3">
-                <div className="w-full h-full rounded-md overflow-hidden bg-teal-500">
+                <div className="relative w-full h-full rounded-md overflow-hidden bg-teal-500 flex items-center justify-center">
                     <Image
                         src={imageUrl}
                         alt={title}
-                        fill
-                        className="object-contain transition-transform p-8 duration-300"
+                        width={200}
+                        height={200}
+                        className="object-contain max-h-full p-4"
                     />
                 </div>
 

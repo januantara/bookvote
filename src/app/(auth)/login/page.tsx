@@ -60,6 +60,10 @@ const LoginPage = () => {
                                         type="text"
                                         placeholder="Enter your NIM"
                                         {...field}
+                                        onChange={(e) => {
+                                            const value = e.target.value.replace(/\D/g, '');
+                                            field.onChange(value);
+                                        }}
                                     />
                                 </FormControl>
                                 <FormMessage />

@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Form, FormLabel, FormField, FormItem, FormControl, FormMessage } from '@/components/ui/form';
-import { UseFormReturn } from "react-hook-form";
-import { FetchBookData } from "@/types/vote";
 import { RefreshCw } from "lucide-react";
+import type { UseFormReturn } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Input } from "@/components/ui/input";
+import type { FetchBookData } from "@/types/vote";
 
 interface FetchBookFormProps {
     form: UseFormReturn<FetchBookData>;

@@ -13,9 +13,8 @@ const StatItem = ({ number, label }: { number: number; label: string }) => (
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold font-sans">
             <CountingNumber
                 number={number}
-                transition={{ stiffness: 50, damping: 100 }}
+                transition={{ stiffness: 100, damping: 40 }}
             />
-            <span>+</span>
         </h2>
         <p className="mt-2 text-sm sm:text-base md:text-lg font-semibold">{label}</p>
     </div>

@@ -6,7 +6,7 @@ import Link from 'next/link';
 interface CardBookProps {
     title: string
     author: string
-    likes: number
+    votes: number
     category: string
     imageUrl: string
     color?: string
@@ -43,7 +43,7 @@ const CardBook = (props: CardBookProps) => {
                         {/* Vote Count Badge */}
                         <div className="inline-flex items-center gap-1.5 bg-teal-50 px-2 md:px-3 py-1 md:py-1.5 rounded-full">
                             <ThumbsUp size={16} className="text-teal-600" />
-                            <span className="text-xs md:text-sm font-bold text-teal-700">{props.likes}</span>
+                            <span className="text-xs md:text-sm font-bold text-teal-700">{props.votes}</span>
                         </div>
                     </div>
 

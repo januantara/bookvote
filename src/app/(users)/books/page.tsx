@@ -1,11 +1,13 @@
 "use client"
 
-import { Input } from "@/components/ui/input"
 import { SearchIcon } from 'lucide-react'
-import CardBook from "@/components/CardBook"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useState } from "react"
+import CardBook from "@/components/CardBook"
+import { Input } from "@/components/ui/input"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useBooks } from "@/hooks/useBooks"
+import type { Book } from '@/types/book'
+import he from "he";
 
 export interface BookFilterProps {
     search?: string
@@ -21,8 +23,6 @@ const BrowseBooks = () => {
     })
 
     const { data: books, isLoading } = useBooks(filters);
-
-    console.log("Books data:", books);
 
     const categories = ["Novel", "Technology", "Management", "Accounting", "Communication", "Design", "Psychology"] as const
     const sortOptions = [
@@ -80,17 +80,17 @@ const BrowseBooks = () => {
                         </Select>
                     </div>
                 </section>
-                <section id="books" className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-10">
+                <section id="books" className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-10">
                     {isLoading ? (
                         <p className="text-center col-span-full text-muted-foreground">Loading books...</p>
                     ) : books?.length > 0 ? (
-                        books.map((book: any) => (
+                        books.map((book: Book) => (
                             <CardBook
                                 key={book.id}
-                                title={book.title}
+                                title={he.decode(book.title)}
                                 author={book.author}
                                 category={book.category}
-                                likes={book.totalVotes || 0}
+                                votes={book.voteCount || 0}
                                 color={book.color}
                                 imageUrl={book.imageUrl}
                             />

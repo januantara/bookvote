@@ -1,8 +1,8 @@
+import type { UseFormReturn } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import { Form, FormLabel, FormField, FormItem, FormControl, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { UseFormReturn } from "react-hook-form";
-import { CategoryFormData } from "@/types/vote";
+import type { CategoryFormData } from "@/types/vote";
 
 interface CreateVoteFormProps {
     form: UseFormReturn<CategoryFormData>;

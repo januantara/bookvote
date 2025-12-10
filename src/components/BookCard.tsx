@@ -58,6 +58,7 @@ const BookCard = () => {
                                     <div className="absolute inset-0 bg-white rounded-2xl blur-xl opacity-40 group-hover:opacity-60 transition-opacity"></div>
                                     <Image
                                         fill
+                                        sizes="(max-width: 768px) 100vw, 176px"
                                         src={book.coverImage}
                                         alt={book.title}
                                         className="relative w-44 h-64 object-cover rounded-2xl shadow-2xl transform group-hover:scale-105 transition-transform duration-300"

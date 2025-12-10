@@ -1,3 +1,4 @@
+// biome-ignore-all lint/suspicious/noArrayIndexKey: Suppressing array index key warning as keys are derived from unique genre names
 import CardBook from "@/components/CardBook";
 import BookCardSkeleton from "@/components/BookCardSkeleton";
 import { CategoryTabs, CategoryTabsList, CategoryTab, CategoryTabContent } from "@/components/CategoryTabs";
@@ -25,7 +26,7 @@ export default function TopRatedBooks({ topBooks, isFetching, selectedCategory, 
                     <CategoryTabContent value={selectedCategory}>
                         {isFetching && (
                             Array.from({ length: 6 }).map((_, index) => (
-                                <BookCardSkeleton key={`skeleton-${Math.random()}`} />
+                                <BookCardSkeleton key={`skeleton-${index}`} />
                             ))
                         )}
 
@@ -39,7 +40,7 @@ export default function TopRatedBooks({ topBooks, isFetching, selectedCategory, 
                                 title={book.title}
                                 author={book.author}
                                 category={book.category}
-                                likes={book.voteCount}
+                                votes={book.voteCount}
                                 imageUrl={book.imageUrl}
                                 color={book.color}
                             />

@@ -9,6 +9,12 @@ import {
   useSpring,
 } from 'motion/react';
 
+export function formatCount(n: number): string {
+  if (n < 1000) return n.toString();
+  const rounded = Math.floor(n / 100) / 10;
+  return rounded >= 10 ? Math.floor(rounded) + 'k+' : rounded + 'k+';
+}
+
 type CountingNumberProps = React.ComponentProps<'span'> & {
   number: number;
   fromNumber?: number;
@@ -30,7 +36,7 @@ function CountingNumber({
   inViewMargin = '0px',
   inViewOnce = true,
   decimalSeparator = '.',
-  transition = { stiffness: 90, damping: 50 },
+  transition = { stiffness: 150, damping: 30 },
   decimalPlaces = 0,
   className,
   ...props
@@ -61,35 +67,12 @@ function CountingNumber({
   React.useEffect(() => {
     const unsubscribe = springVal.on('change', (latest) => {
       if (localRef.current) {
-        let formatted =
-          decimals > 0
-            ? latest.toFixed(decimals)
-            : Math.round(latest).toString();
-
-        if (decimals > 0) {
-          formatted = formatted.replace('.', decimalSeparator);
-        }
-
-        if (padStart) {
-          const finalIntLength = Math.floor(Math.abs(number)).toString().length;
-          const [intPart, fracPart] = formatted.split(decimalSeparator);
-          const paddedInt = intPart?.padStart(finalIntLength, '0') ?? '';
-          formatted = fracPart
-            ? `${paddedInt}${decimalSeparator}${fracPart}`
-            : paddedInt;
-        }
-
-        if (latest >= 1000) {
-          const value = latest / 1000;
-          const rounded = value % 1 === 0 ? value.toFixed(0) : value.toFixed(1);
-          formatted = `${rounded}K`;
-        }
-
-        localRef.current.textContent = formatted;
+        const roundedLatest = Math.round(latest);
+        localRef.current.textContent = formatCount(roundedLatest);
       }
     });
     return () => unsubscribe();
-  }, [springVal, decimals, padStart, number, decimalSeparator]);
+  }, [springVal]);
 
   const finalIntLength = Math.floor(Math.abs(number)).toString().length;
   const initialText = padStart

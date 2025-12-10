@@ -56,11 +56,11 @@ const RegisterPage = () => {
                         name="fullname"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Nama Lengkap</FormLabel>
+                                <FormLabel>Full Name</FormLabel>
                                 <FormControl>
                                     <Input
                                         id="fullname"
-                                        placeholder="Masukan nama lengkap anda"
+                                        placeholder="Enter your full name"
                                         type="text"
                                         {...field}
                                     />
@@ -80,8 +80,12 @@ const RegisterPage = () => {
                                     <Input
                                         id="nim"
                                         type="text"
-                                        placeholder="Masukan nim anda"
+                                        placeholder="Enter your NIM"
                                         {...field}
+                                        onChange={(e) => {
+                                            const value = e.target.value.replace(/\D/g, '');
+                                            field.onChange(value);
+                                        }}
                                     />
                                 </FormControl>
                                 <FormMessage />
@@ -100,7 +104,7 @@ const RegisterPage = () => {
                                     <Input
                                         id="email"
                                         type="email"
-                                        placeholder="Masukan email anda"
+                                        placeholder="Enter your email"
                                         {...field}
                                     />
                                 </FormControl>
@@ -119,7 +123,7 @@ const RegisterPage = () => {
                                 <FormControl>
                                     <PasswordInput
                                         id="password"
-                                        placeholder="Masukan password anda"
+                                        placeholder="Enter your password"
                                         {...field}
                                     />
                                 </FormControl>
@@ -138,7 +142,7 @@ const RegisterPage = () => {
                                 <FormControl>
                                     <PasswordInput
                                         id="confirmPassword"
-                                        placeholder="Masukan konfirmasi password"
+                                        placeholder="Enter your password confirmation"
                                         {...field}
                                     />
                                 </FormControl>

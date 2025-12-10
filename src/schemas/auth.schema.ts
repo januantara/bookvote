@@ -26,9 +26,8 @@ export const registerSchema = z.object({
 
 export const loginSchema = z.object({
     nim: z.string()
-        .regex(/^[0-9]+$/, "Nim must contain only numbers")
-        .min(8, "Nim must be at least 8 characters")
-        .max(18, "Nim must be at most 18 characters"),
+        .min(1, "NIM is required")
+        .regex(/^[0-9]+$/, "Invalid NIM format"),
     password: z.string()
         .min(1, "Password is required")
 });
