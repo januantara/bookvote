@@ -53,7 +53,7 @@ function CategoryTabContent({
     return (
         <Tabs.Content
             data-slot="tabs-content"
-            className={cn("grid gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 mt-10", className)}
+            className={cn("grid gap-4 grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 mt-10", className)}
             {...props}
         />
     )

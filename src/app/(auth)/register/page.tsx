@@ -1,6 +1,12 @@
 "use client";
 
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+
 import {
     Form,
     FormControl,
@@ -10,45 +16,34 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { type RegisterFormData, registerSchema } from "@/types/register";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { useRegister } from "@/queries/useAuth";
 import PasswordInput from "@/components/ui/password";
+import { useRegister } from "@/hooks/useAuth";
+import { type RegisterFormData, registerSchema } from "@/schemas/auth.schema";
 
 const RegisterPage = () => {
-    const { mutate, isPending, error } = useRegister();
+    const register = useRegister();
 
     const form = useForm<RegisterFormData>({
         resolver: zodResolver(registerSchema),
         mode: "onChange",
         defaultValues: {
-            fullName: "",
-            email: "",
+            fullname: "",
             nim: "",
+            email: "",
             password: "",
             confirmPassword: "",
         },
     });
 
     const onSubmit = async (data: RegisterFormData) => {
-        const parsed = registerSchema.safeParse(data);
+        const parsed = registerSchema.safeParse(data)
+
         if (!parsed.success) {
-            toast.error("Please check your input and try again.");
+            toast.error(parsed.error.message)
             return;
         }
 
-        const registerData = {
-            fullname: parsed.data.fullName,
-            nim: parsed.data.nim,
-            email: parsed.data.email,
-            password: parsed.data.password
-        }
-
-        const callbacks = mutate(registerData);
-        console.log(callbacks)
+        await register.mutate(parsed.data)
     };
 
     return (
@@ -58,13 +53,13 @@ const RegisterPage = () => {
                 <form onSubmit={form.handleSubmit(onSubmit)} className="grid w-md border rounded-md p-6 gap-6">
                     <FormField
                         control={form.control}
-                        name="fullName"
+                        name="fullname"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Nama Lengkap</FormLabel>
                                 <FormControl>
                                     <Input
-                                        id="fullName"
+                                        id="fullname"
                                         placeholder="Masukan nama lengkap anda"
                                         type="text"
                                         {...field}
@@ -152,7 +147,7 @@ const RegisterPage = () => {
                         )}
                     />
 
-                    <Button type="submit" disabled={isPending}>{isPending ? "Registering..." : "Register"}</Button>
+                    <Button type="submit" disabled={register.isPending}>{register.isPending ? "Registering..." : "Register"}</Button>
                 </form>
             </Form>
             <span className="text-sm text-gray-500">Already have an account? <Link href="/login" className="hover:text-cyan-500 underline">Login</Link></span>

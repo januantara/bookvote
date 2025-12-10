@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const registerSchema = z.object({
-    fullName: z.string()
+    fullname: z.string()
         .min(3, "Name must be at least 3 characters")
         .max(25, "Full name must be at most 25 characters"),
     email: z.string()
@@ -24,4 +24,14 @@ export const registerSchema = z.object({
     path: ["confirmPassword"],
 });
 
+export const loginSchema = z.object({
+    nim: z.string()
+        .regex(/^[0-9]+$/, "Nim must contain only numbers")
+        .min(8, "Nim must be at least 8 characters")
+        .max(18, "Nim must be at most 18 characters"),
+    password: z.string()
+        .min(1, "Password is required")
+});
+
+export type LoginFormData = z.infer<typeof loginSchema>;
 export type RegisterFormData = z.infer<typeof registerSchema>;

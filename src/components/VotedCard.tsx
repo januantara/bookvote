@@ -1,4 +1,4 @@
-import { BookOpenCheck, Calendar, ThumbsDown, ThumbsUp } from "lucide-react";
+import { BookOpenCheck, Calendar, ThumbsDown, ThumbsUp, BookCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -31,7 +31,7 @@ const VotedCard = ({
                         src={imageUrl}
                         alt={title}
                         fill
-                        className="object-contain group-hover:scale-105 transition-transform p-8 duration-300"
+                        className="object-contain transition-transform p-8 duration-300"
                     />
                 </div>
 
@@ -42,10 +42,10 @@ const VotedCard = ({
                     </span>
                 </div>
 
-                {/* Is purchased Badge */}
+                {/* Purchased Badge */}
                 {isPurchased && (
-                    <div className="abosolute top-6 right-6 z-10">
-                        <BookOpenCheck />
+                    <div className="absolute top-6 right-6 bg-primary text-white p-1.5 rounded-full shadow-sm">
+                        <BookCheck size={16} strokeWidth={2.5} />
                     </div>
                 )}
             </div>

@@ -1,52 +1,103 @@
+"use client"
+
 import { Input } from "@/components/ui/input"
-import { SearchIcon } from 'lucide-react';
-import Dropdown from "@/components/DropDown";
-import CardBook from "@/components/CardBook";
+import { SearchIcon } from 'lucide-react'
+import CardBook from "@/components/CardBook"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from "react"
+import { useBooks } from "@/hooks/useBooks"
+
+export interface BookFilterProps {
+    search?: string
+    category?: "Novel" | "Technology" | "Management" | "Accounting" | "Communication" | "Design" | "Psychology"
+    sort?: "most_voted" | "newest" | "oldest"
+    isPurchased?: boolean
+}
 
 const BrowseBooks = () => {
-    const categories = ["All Genres", "Fiction", "Non-Fiction", "Science", "History", "Technology", "Education", "Literature"];
-    const sortOptions = ["Most Voted", "Newest", "Oldest"];
+    const [filters, setFilters] = useState<BookFilterProps>({
+        search: "",
+        sort: "most_voted",
+    })
+
+    const { data: books, isLoading } = useBooks(filters);
+
+    console.log("Books data:", books);
+
+    const categories = ["Novel", "Technology", "Management", "Accounting", "Communication", "Design", "Psychology"] as const
+    const sortOptions = [
+        { value: "most_voted", label: "Most Voted" },
+        { value: "newest", label: "Newest" },
+        { value: "oldest", label: "Oldest" },
+    ] as const
 
     return (
         <div className="w-full">
             <div className="max-w-7xl px-6 mx-auto mt-10">
-
                 <section id="filter">
                     <div className="relative items-center flex">
-                        <SearchIcon
-                            size={16}
-                            className="absolute ml-4 text-primary"
-                        />
-
+                        <SearchIcon size={16} className="absolute ml-4 text-primary" />
                         <Input
                             type="search"
                             placeholder="Search Books"
                             className="border border-primary py-6 ps-10 rounded-full"
+                            value={filters.search}
+                            onChange={(e) => setFilters({ ...filters, search: e.target.value })}
                         />
                     </div>
-                    <div className="flex w-full items-center mt-6 justify-between">
-                        <Dropdown
-                            label="All Category"
-                            className="bg-background hover:bg-background hover:border-primary text-neutral-600 hover:text-primary border shadow-none"
-                            DropdownItems={categories}
-                        />
-                        <Dropdown
-                            label="Sort By"
-                            DropdownItems={sortOptions}
-                        />
+                    <div className="flex w-full items-center mt-6 gap-3">
+                        <Select
+                            value={filters.category}
+                            onValueChange={(value) => setFilters({ ...filters, category: value === "all" ? undefined : value as BookFilterProps["category"] })}
+                        >
+                            <SelectTrigger className="w-[180px]">
+                                <SelectValue placeholder="All Category" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="all">All Category</SelectItem>
+                                {categories.map((cat) => (
+                                    <SelectItem key={cat} value={cat}>
+                                        {cat}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+
+                        <Select
+                            value={filters.sort}
+                            onValueChange={(value) => setFilters({ ...filters, sort: value as BookFilterProps["sort"] })}
+                        >
+                            <SelectTrigger className="w-[180px]">
+                                <SelectValue placeholder="Sort By" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {sortOptions.map((option) => (
+                                    <SelectItem key={option.value} value={option.value}>
+                                        {option.label}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
                     </div>
                 </section>
                 <section id="books" className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-10">
-                    {Array.from({ length: 6 }, (_, index) => (
-                        <CardBook
-                            key={`book-${index.toString}`}
-                            title="James Humility Consert Higghiels"
-                            author="Jamse Arthur"
-                            category="Horror"
-                            likes={1245}
-                            imageUrl="https://cdn.gramedia.com/uploads/products/a-d-i2ia-n.jpg"
-                        />
-                    ))}
+                    {isLoading ? (
+                        <p className="text-center col-span-full text-muted-foreground">Loading books...</p>
+                    ) : books?.length > 0 ? (
+                        books.map((book: any) => (
+                            <CardBook
+                                key={book.id}
+                                title={book.title}
+                                author={book.author}
+                                category={book.category}
+                                likes={book.totalVotes || 0}
+                                color={book.color}
+                                imageUrl={book.imageUrl}
+                            />
+                        ))
+                    ) : (
+                        <p className="text-center col-span-full text-muted-foreground">No books found</p>
+                    )}
                 </section>
             </div>
         </div>

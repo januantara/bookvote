@@ -46,4 +46,4 @@ src/app/create-vote/*
 src/components/ProfileHeader.tsx
 src/components/VotingHistoryCard.tsx
 src/components/CreatedVoteCard.tsx
-
+TODOS.md

@@ -1,13 +1,14 @@
 'use client';
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { type LoginFormData, loginSchema } from "@/types/login";
-import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import PasswordInput from "@/components/ui/password";
-import { Button } from "@/components/ui/button";
+import { useLogin } from "@/hooks/useAuth";
+import { type LoginFormData, loginSchema } from "@/schemas/auth.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 const Emoji = () => (
     <div className="w-16 h-16 mx-auto bg-primary/20 rounded-2xl flex items-center justify-center mb-6">
@@ -19,6 +20,8 @@ const Emoji = () => (
 )
 
 const LoginPage = () => {
+    const login = useLogin()
+
     const form = useForm<LoginFormData>({
         resolver: zodResolver(loginSchema),
         mode: "onSubmit",
@@ -35,10 +38,8 @@ const LoginPage = () => {
             toast.error("Please check your input and try again");
             return;
         }
-        console.log({
-            nim: data.nim,
-            password: data.password
-        })
+
+        await login.mutate(parsed.data)
     }
 
     return (
@@ -84,7 +85,7 @@ const LoginPage = () => {
                         )}
                     />
 
-                    <Button type="submit">Login</Button>
+                    <Button type="submit" disabled={login.isPending}>{login.isPending ? 'Signing...' : 'Login'}</Button>
                 </form>
             </Form>
             <span>Don't have an account? <a href="/register" className="hover:text-primary underline">Register</a></span>

@@ -12,12 +12,12 @@ interface CardBookProps {
     color?: string
 }
 
-const CardBook = (props: CardBookProps) => {
+const BookPreview = (props: CardBookProps) => {
     return (
         <div className="card rounded-3xl max-sm:border bg-white md:shadow-sm overflow-hidden">
 
             <div
-                className="card-header grid place-items-center py-6 sm:py-8 md:py-10 h-[180px] sm:h-[280px] md:h-[400px]"
+                className="card-header grid place-items-center py-6 sm:py-8 md:py-10 h-[180px] sm:h-[280px] md:h-[300px]"
                 style={{ backgroundColor: props.color || '#14b8a6' }}
             >
                 <div className="relative shadow-lg md:shadow-2xl">
@@ -27,7 +27,7 @@ const CardBook = (props: CardBookProps) => {
                         width={180}
                         height={240}
                         loading='lazy'
-                        className='w-auto h-[110px] sm:h-[180px] md:h-[260px] object-cover'
+                        className='w-auto h-[110px] sm:h-[180px] md:h-[180px] object-cover'
                     />
                 </div>
             </div>
@@ -70,4 +70,4 @@ const CardBook = (props: CardBookProps) => {
     )
 }
 
-export default CardBook
+export default BookPreview;

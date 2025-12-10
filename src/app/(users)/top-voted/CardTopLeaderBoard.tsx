@@ -1,10 +1,11 @@
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { Crown, Medal, Award, ThumbsUpIcon } from "lucide-react"
+import Link from "next/link";
 
 interface CardLeaderBoardProps {
     rank: number;
-    countVote: number;
+    voteCount: number;
     title: string;
     author: string;
     category: string;
@@ -48,7 +49,7 @@ const rankVariant = {
 }
 
 
-const CardTopLeaderBoard = ({ rank, imageUrl, countVote, category, title, author, description }: CardLeaderBoardProps) => {
+const CardTopLeaderBoard = ({ rank, imageUrl, voteCount, category, title, author, description }: CardLeaderBoardProps) => {
     const variant = rank >= 1 && rank <= 3
         ? rankVariant[rank as 1 | 2 | 3]
         : rankVariant["default"];
@@ -59,7 +60,7 @@ const CardTopLeaderBoard = ({ rank, imageUrl, countVote, category, title, author
 
             {/* Rank Badge */}
             <div className={cn(
-                "flex absolute top-1 left-1 z-10 size-12 bg-gradient-to-br text-white items-center justify-center rounded-full font-bold",
+                "flex absolute top-1 left-1 z-10 size-12 bg-linear-to-br text-white items-center justify-center rounded-full font-bold",
                 variant.rankBadge
             )}>
                 #{rank}
@@ -71,7 +72,7 @@ const CardTopLeaderBoard = ({ rank, imageUrl, countVote, category, title, author
                 variant.voteCount
             )}>
                 <ThumbsUpIcon size={16} strokeWidth={2.5} />
-                {countVote} Votes
+                {voteCount} Votes
             </div>
 
             {/* Book Cover */}
@@ -95,9 +96,17 @@ const CardTopLeaderBoard = ({ rank, imageUrl, countVote, category, title, author
 
                 <h3 className="text-2xl font-bold mt-4">{title}</h3>
                 <h4 className="mt-2 text-sm text-neutral-500">by <strong>{author}</strong></h4>
-                <p className="mt-2">
-                    {description.substring(0, 300) + "..."}
-                </p>
+                <div className="mt-2 text-justify relative">
+                    <p className="line-clamp-3">{description}</p>
+                    <span className="absolute bottom-0 right-0 flex items-center bg-linear-to-r from-transparent via-white via-30% to-white pl-12">
+                        <Link
+                            className="text-sm underline text-gray-500 hover:text-primary"
+                            href={'/'}
+                        >
+                            See Details
+                        </Link>
+                    </span>
+                </div>
             </div>
 
         </div>
