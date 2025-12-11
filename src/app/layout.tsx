@@ -32,6 +32,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-dvh`}
       >
+        <div className="bg-yellow-300 text-black text-center py-2 text-sm font-medium">
+          🚧 This site is under revamp 🚧 |
+          <a href="https://github.com/januantara/bookvote" target="_blank" rel="noopener noreferrer" className="underline hover:text-yellow-800 ml-1">Frontend</a>
+          {" • "}
+          <a href="https://github.com/januantara/bookvote-backend" target="_blank" rel="noopener noreferrer" className="underline hover:text-yellow-800">Backend</a>
+        </div>
         <QueryClientProviderWrapper>
           {children}
         </QueryClientProviderWrapper>
