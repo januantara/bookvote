@@ -7,7 +7,6 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useBooks } from "@/hooks/useBooks"
 import type { Book } from '@/types/book'
-import he from "he";
 
 export interface BookFilterProps {
     search?: string
@@ -87,7 +86,8 @@ const BrowseBooks = () => {
                         books.map((book: Book) => (
                             <CardBook
                                 key={book.id}
-                                title={he.decode(book.title)}
+                                id={book.id}
+                                title={book.title}
                                 author={book.author}
                                 category={book.category}
                                 votes={book.voteCount || 0}

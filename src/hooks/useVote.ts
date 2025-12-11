@@ -1,11 +1,11 @@
-import { voteService } from "@/services/vote.service"
-import { ErrorResponse } from "@/types/axios-error"
-import { CreateVoteData } from "@/types/vote"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { AxiosError } from "axios"
+import type { AxiosError } from "axios"
 import { toast } from "sonner"
+import { voteService } from "@/services/vote.service"
+import type { ErrorResponse } from "@/types/axios-error"
+import type { CreateVoteData } from "@/types/vote"
 
-export const useVote = () => {
+export const useCreateVote = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -23,5 +23,27 @@ export const useTopVotedBooks = () => {
     return useQuery({
         queryKey: ['top-voted-books'],
         queryFn: () => voteService.getTopVotedBooks(),
+    })
+}
+
+export const useToggleVote = () => {
+    const qc = useQueryClient();
+
+    return useMutation({
+        mutationFn: async ({ userId, bookId }: {
+            userId: string;
+            bookId: number;
+        }) => {
+            if (!userId) throw new Error("User not authenticated");
+            console.log("Voting for book ID:", bookId, "by user ID:", userId);
+            return voteService.vote(userId, bookId);
+        },
+        onSuccess: () => {
+            qc.invalidateQueries({ queryKey: ["books"], refetchType: "active" });
+            qc.invalidateQueries({ queryKey: ["stats"], refetchType: "active" });
+        },
+        onError: (error: AxiosError<ErrorResponse>) => {
+            toast.error(error.response?.data?.error || "Failed to vote the book. Please try again.");
+        }
     })
 }

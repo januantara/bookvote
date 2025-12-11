@@ -1,6 +1,6 @@
-import { BookOpenCheck, Calendar, ThumbsDown, ThumbsUp, BookCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { BookCheck, Calendar, ThumbsDown, ThumbsUp } from "lucide-react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface NewArrivalCardProps {

@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react';
-import { ThumbsUp, Eye, Sparkles } from 'lucide-react';
+import { Eye, Sparkles, ThumbsUp } from 'lucide-react';
 import Image from 'next/image';
-import { Button } from './ui/button';
+import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { Button } from './ui/button';
 
 const BookCard = () => {
     const [voteCount, setVoteCount] = useState(42);
@@ -33,7 +33,7 @@ const BookCard = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-teal-50 via-cyan-50 to-emerald-50 p-4">
+        <div className="flex items-center justify-center min-h-screen bg-linear-to-br from-teal-50 via-cyan-50 to-emerald-50 p-4">
             <div className="w-full max-w-md">
                 <div className="relative">
                     {/* Decorative blur circles */}
@@ -73,7 +73,7 @@ const BookCard = () => {
                             <div className="bg-white rounded-2xl p-6 shadow-lg">
                                 {/* Category Badge */}
                                 <div className="flex items-center justify-between mb-3">
-                                    <span className="inline-flex items-center gap-1 bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-xs font-bold px-4 py-2 rounded-full">
+                                    <span className="inline-flex items-center gap-1 bg-linear-to-r from-teal-500 to-cyan-500 text-white text-xs font-bold px-4 py-2 rounded-full">
                                         <Sparkles size={12} />
                                         {book.category}
                                     </span>
@@ -103,7 +103,7 @@ const BookCard = () => {
                                         className={cn(
                                             "flex-1 flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 active:scale-95",
                                             hasVoted
-                                                ? 'bg-gradient-to-r from-teal-600 to-cyan-600 text-white shadow-lg shadow-teal-300'
+                                                ? 'bg-linear-to-r from-teal-600 to-cyan-600 text-white shadow-lg shadow-teal-300'
                                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                                         )}
                                     >
@@ -113,7 +113,7 @@ const BookCard = () => {
 
                                     <Button
                                         onClick={handleSeeDetail}
-                                        className="flex-1 flex items-center justify-center gap-2 px-5 py-3.5 bg-gradient-to-r from-teal-500 to-emerald-500 text-white rounded-xl font-bold hover:shadow-lg hover:shadow-teal-300 transition-all duration-300 transform hover:scale-105 active:scale-95"
+                                        className="flex-1 flex items-center justify-center gap-2 px-5 py-3.5 bg-linear-to-r from-teal-500 to-emerald-500 text-white rounded-xl font-bold hover:shadow-lg hover:shadow-teal-300 transition-all duration-300 transform hover:scale-105 active:scale-95"
                                     >
                                         <Eye size={18} />
                                         Detail

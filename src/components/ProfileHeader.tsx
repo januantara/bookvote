@@ -50,7 +50,7 @@ export default function ProfileHeader() {
                                     src={session.user.image || undefined}
                                     alt={session.user.name}
                                 /> */}
-                                <AvatarFallback className="text-2xl bg-gradient-to-br from-primary to-secondary text-white">
+                                <AvatarFallback className="text-2xl bg-linear-to-br from-primary to-secondary text-white">
                                     {initialName}
                                 </AvatarFallback>
                             </Avatar>

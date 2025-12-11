@@ -1,9 +1,9 @@
-import { bookService } from "@/services/book.service";
-import { ErrorResponse } from "@/types/axios-error";
-import { FetchBooksRequestData } from "@/types/book";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import type { AxiosError } from "axios";
 import { toast } from "sonner";
+import { bookService } from "@/services/book.service";
+import type { ErrorResponse } from "@/types/axios-error";
+import type { FetchBooksRequestData } from "@/types/book";
 
 export const useBooks = (params?: {
     search?: string;

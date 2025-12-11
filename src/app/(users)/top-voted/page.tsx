@@ -1,11 +1,11 @@
 "use client"
 
+import he from 'he';
 import { Trophy } from 'lucide-react';
-import CardTopLeaderBoard from './CardTopLeaderBoard';
-import CardTopLeaderBoardSkeleton from './CardTopLeaderBoardSkeleton';
 import { useTopVotedBooks } from '@/hooks/useVote';
 import type { TopVotedBook } from '@/types/vote';
-import he from 'he';
+import CardTopLeaderBoard from './CardTopLeaderBoard';
+import CardTopLeaderBoardSkeleton from './CardTopLeaderBoardSkeleton';
 
 const TopVoted = () => {
     const { data: topVotedBooks, isLoading } = useTopVotedBooks();

@@ -1,6 +1,5 @@
 'use client';
 
-import * as React from 'react';
 import {
   type SpringOptions,
   type UseInViewOptions,
@@ -8,6 +7,7 @@ import {
   useMotionValue,
   useSpring,
 } from 'motion/react';
+import * as React from 'react';
 
 export function formatCount(n: number): string {
   if (n < 1000) return n.toString();

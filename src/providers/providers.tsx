@@ -1,5 +1,6 @@
 "use client";
 
+import { useInitAuth } from "@/hooks/useInitAuth";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 
@@ -14,7 +15,7 @@ const queryClient = new QueryClient({
 });
 
 const QueryClientProviderWrapper = ({ children }: { children: ReactNode }) => {
-
+    useInitAuth();
     return (
         <QueryClientProvider client={queryClient}>
             {children}

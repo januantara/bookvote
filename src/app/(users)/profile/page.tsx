@@ -1,8 +1,8 @@
 'use client'
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Mail } from 'lucide-react';
 import * as Tabs from '@radix-ui/react-tabs';
+import { Mail } from 'lucide-react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import VotedCard from '@/components/VotedCard';
 import { useAuthStore } from '@/store/authStore';
 

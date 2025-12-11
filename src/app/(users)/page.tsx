@@ -12,7 +12,7 @@ const GENRES = ["All Genres", "Novel", "Technology", "Management", "Accounting",
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>(GENRES[0]);
   const categoryParam = selectedCategory === "All Genres" ? null : selectedCategory;
-  const { data: stats, isFetching } = useStats({ category: categoryParam });
+  const { data: stats, isLoading } = useStats({ category: categoryParam });
   const topBooks = stats?.topBooks || [];
   const statsData = stats?.stats;
 
@@ -25,7 +25,7 @@ export default function Home() {
       <HeroSection />
       <TopRatedBooks
         topBooks={topBooks}
-        isFetching={isFetching}
+        isLoading={isLoading}
         selectedCategory={selectedCategory}
         onCategoryChange={handleCategoryChange}
       />

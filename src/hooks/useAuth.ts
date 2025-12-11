@@ -1,11 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import type { LoginFormData, RegisterFormData } from "@/schemas/auth.schema";
 import { authService } from "@/services/auth.service";
-import { AxiosError } from "axios";
 import { useAuthStore } from "@/store/authStore";
-import { ErrorResponse } from "@/types/axios-error";
+import type { ErrorResponse } from "@/types/axios-error";
 
 export const useRegister = () => {
     const router = useRouter();

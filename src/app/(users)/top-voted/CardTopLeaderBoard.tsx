@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils"
+import { Award, Crown, Medal, ThumbsUpIcon } from "lucide-react"
 import Image from "next/image"
-import { Crown, Medal, Award, ThumbsUpIcon } from "lucide-react"
 import Link from "next/link";
+import { cn } from "@/lib/utils"
 
 interface CardLeaderBoardProps {
     rank: number;

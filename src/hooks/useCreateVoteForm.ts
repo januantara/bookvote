@@ -1,15 +1,15 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { AxiosError } from "axios";
 import { useFetchBook } from '@/hooks/useBooks';
+import { CategorySchema, CreateVoteSchema, FetchBookSchema } from "@/schemas/vote.schema";
 import { useAuthStore } from "@/store/authStore";
-import { CreateVoteData, FetchBookData, CategoryFormData } from "@/types/vote";
-import { CreateVoteSchema, FetchBookSchema, CategorySchema } from "@/schemas/vote.schema";
-import { ErrorResponse } from "@/types/axios-error";
-import { useRouter } from "next/navigation";
-import { useVote } from "./useVote";
+import type { ErrorResponse } from "@/types/axios-error";
+import type { CategoryFormData, CreateVoteData, FetchBookData } from "@/types/vote";
+import { useCreateVote } from "./useVote";
 
 interface BookData {
     title: string;
@@ -26,7 +26,7 @@ export function useCreateVoteForm() {
     const [isConfirmOpen, setIsConfirmOpen] = useState(false);
     const [isSuccessOpen, setIsSuccessOpen] = useState(false);
     const [pendingVoteData, setPendingVoteData] = useState<CategoryFormData | null>(null);
-    const { mutate: createVote } = useVote();
+    const { mutate: createVote } = useCreateVote();
     const router = useRouter();
 
     const fetchForm = useForm<FetchBookData>({

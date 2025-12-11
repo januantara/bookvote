@@ -1,18 +1,32 @@
 import { Eye, Sparkles, ThumbsUp, ThumbsUpIcon } from 'lucide-react';
 import Image from 'next/image';
-import { Button } from './ui/button';
 import Link from 'next/link';
+import { Button } from './ui/button';
+import { useToggleVote } from '@/hooks/useVote';
+import { useAuthStore } from '@/store/authStore';
+import { useRouter } from 'next/navigation';
+import he from 'he';
 
 interface CardBookProps {
-    title: string
-    author: string
-    votes: number
-    category: string
-    imageUrl: string
-    color?: string
+    id: number;
+    title: string;
+    author: string;
+    votes: number;
+    category: string;
+    imageUrl: string;
+    color?: string;
 }
 
 const CardBook = (props: CardBookProps) => {
+    const router = useRouter();
+    const userId = useAuthStore.getState().user?.id;
+    const toggleVote = useToggleVote();
+
+    const handleVote = () => {
+        if (!userId) return router.push('/login');
+        toggleVote.mutate({ userId, bookId: props.id });
+    }
+
     return (
         <div className="card rounded-3xl max-sm:border bg-white md:shadow-sm overflow-hidden">
 
@@ -48,13 +62,21 @@ const CardBook = (props: CardBookProps) => {
                     </div>
 
                     <h4 className='mt-4 font-bold text-sm md:text-base line-clamp-1'>
-                        {props.title}
+                        {he.decode(props.title)}
                     </h4>
 
-                    <h5 className='text-xs md:text-sm mt-2 text-neutral-400'>by <span className='text-neutral-500 font-semibold'>{props.author}</span></h5>
+                    <h5 className='text-xs md:text-sm mt-2 text-neutral-400'>by <span className='text-neutral-500 font-semibold'>{he.decode(props.author)}</span></h5>
 
                     <div className="card-footer flex mt-6 gap-3">
-                        <Button className="md:flex-1 p-4 max-sm:text-sm font-semibold sm:text-xs"><ThumbsUpIcon /> <span className='hidden md:block'>Upvote</span></Button>
+                        <Button onClick={handleVote} disabled={toggleVote.isPending} className="md:flex-1 p-4 max-sm:text-sm font-semibold sm:text-xs">
+                            {toggleVote.isPending
+                                ? <div className="border-b size-4 rounded-full animate-spin border-black"></div>
+                                : <>
+                                    <ThumbsUpIcon />
+                                    <span className='hidden md:block'>Upvote</span>
+                                </>
+                            }
+                        </Button>
                         <Button asChild className="flex flex-1 px-4 max-sm:text-sm gap-2 rounded-md items-center justify-center bg-background text-primary/80 border border-primary/30 hover:text-primary hover:bg-primary/3 hover:border-primary shadow-none font-semibold">
                             <Link href="/books/:bookId" >
                                 <Eye className='hidden lg:inline-flex' />
