@@ -45,3 +45,4 @@ src/app/(users)/profile/new/**
 src/components/VotingHistoryCard.tsx
 src/components/CreatedVoteCard.tsx
 TODOS.md
+.vercel
