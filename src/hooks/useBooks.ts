@@ -27,3 +27,9 @@ export const useFetchBook = () => {
     })
 }
 
+export const useBookDetails = (bookId: number) => {
+    return useQuery({
+        queryKey: ['book', bookId],
+        queryFn: () => bookService.getBookById(Number(bookId)),
+    });
+}

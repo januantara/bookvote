@@ -38,8 +38,9 @@ export const useToggleVote = () => {
             console.log("Voting for book ID:", bookId, "by user ID:", userId);
             return voteService.vote(userId, bookId);
         },
-        onSuccess: () => {
+        onSuccess: (_, variables) => {
             qc.invalidateQueries({ queryKey: ["books"], refetchType: "active" });
+            qc.invalidateQueries({ queryKey: ["book", variables.bookId], refetchType: "active" });
             qc.invalidateQueries({ queryKey: ["stats"], refetchType: "active" });
         },
         onError: (error: AxiosError<ErrorResponse>) => {

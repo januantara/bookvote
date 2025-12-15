@@ -17,4 +17,10 @@ export const bookService = {
         return response.data;
     },
 
+    getBookById: async (bookId: number) => {
+        const response = await api.get(`/books?bookId=${bookId}`);
+        console.log(response.data);
+        return response.data;
+    }
+
 }

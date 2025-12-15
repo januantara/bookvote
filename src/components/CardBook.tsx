@@ -78,7 +78,7 @@ const CardBook = (props: CardBookProps) => {
                             }
                         </Button>
                         <Button asChild className="flex flex-1 px-4 max-sm:text-sm gap-2 rounded-md items-center justify-center bg-background text-primary/80 border border-primary/30 hover:text-primary hover:bg-primary/3 hover:border-primary shadow-none font-semibold">
-                            <Link href="/books/:bookId" >
+                            <Link href={`/books/${props.id}`} >
                                 <Eye className='hidden lg:inline-flex' />
                                 Details
                             </Link>
