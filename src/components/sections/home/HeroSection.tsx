@@ -12,7 +12,7 @@ export default function HeroSection() {
                 BookVote, Where <br /> <span className="text-primary">Readers Decide What's Next</span>
             </h1>
             <p className="mt-2 max-w-172 text-neutral-500 text-center px-6 text-sm md:text-base">
-                BookVote adalah platform bagi mahasiswa untuk mengusulkan dan memilih buku baru di perpustakaan. Kami percaya, pengetahuan berkembang dari mereka yang membacanya.
+                BookVote adalah platform bagi mahasiswa untuk mengusulkan dan memilih buku baru di perpustakaan. Karena kami percaya pengetahuan berkembang dari mereka yang membacanya.
             </p>
             <div className="flex space-x-6 mt-10">
                 <Button className="w-40 py-5 group" asChild>

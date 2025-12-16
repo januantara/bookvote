@@ -33,3 +33,10 @@ export const useBookDetails = (bookId: number) => {
         queryFn: () => bookService.getBookById(Number(bookId)),
     });
 }
+
+export const usePurchasedBooks = () => {
+    return useQuery({
+        queryKey: ['books', 'purchased'],
+        queryFn: () => bookService.getPurchasedBooks()
+    })
+}

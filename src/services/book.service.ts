@@ -19,7 +19,11 @@ export const bookService = {
 
     getBookById: async (bookId: number) => {
         const response = await api.get(`/books?bookId=${bookId}`);
-        console.log(response.data);
+        return response.data;
+    },
+
+    getPurchasedBooks: async () => {
+        const response = await api.get('/books/purchased');
         return response.data;
     }
 
