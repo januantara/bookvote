@@ -3,8 +3,10 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import he from "he";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 interface NewArrivalCardProps {
+    id: number;
     title: string;
     author: string;
     category: string;
@@ -16,6 +18,7 @@ interface NewArrivalCardProps {
 }
 
 const VotedCard = ({
+    id,
     title,
     author,
     category,
@@ -82,7 +85,13 @@ const VotedCard = ({
                     Vote
                     <ThumbsUp className="size-4 inline-block" />
                 </Button>
-                <Button variant="outline" className="cursor-pointer shadow-none">Detail</Button>
+                <Button
+                    variant="outline"
+                    className="cursor-pointer shadow-none"
+                    asChild
+                >
+                    <Link href={`/books/${id}`}>Detail</Link>
+                </Button>
             </div>
         </div>
     </div>

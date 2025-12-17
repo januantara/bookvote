@@ -30,6 +30,7 @@ export default function RequestedBooks({ requestedBooks, isLoading }: RequestedB
             {requestedBooks.map((book) => (
                 <VotedCard
                     key={book.id}
+                    id={book.id}
                     title={book.title}
                     author={book.author}
                     category={book.category}

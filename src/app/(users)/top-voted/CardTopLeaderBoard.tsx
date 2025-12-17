@@ -4,6 +4,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils"
 
 interface CardLeaderBoardProps {
+    id: number;
     rank: number;
     voteCount: number;
     title: string;
@@ -49,7 +50,7 @@ const rankVariant = {
 }
 
 
-const CardTopLeaderBoard = ({ rank, imageUrl, voteCount, category, title, author, description }: CardLeaderBoardProps) => {
+const CardTopLeaderBoard = ({ id, rank, imageUrl, voteCount, category, title, author, description }: CardLeaderBoardProps) => {
     const variant = rank >= 1 && rank <= 3
         ? rankVariant[rank as 1 | 2 | 3]
         : rankVariant["default"];
@@ -101,7 +102,7 @@ const CardTopLeaderBoard = ({ rank, imageUrl, voteCount, category, title, author
                     <span className="absolute bottom-0 right-0 flex items-center bg-linear-to-r from-transparent via-white via-30% to-white pl-12">
                         <Link
                             className="text-sm underline text-gray-500 hover:text-primary"
-                            href={'/'}
+                            href={`/books/${id}`}
                         >
                             See Details
                         </Link>

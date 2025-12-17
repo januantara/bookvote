@@ -47,7 +47,7 @@ const NewArrivalCard = ({
                 </div>
 
                 {/* Title */}
-                <h3 className="font-bold text-sm line-clamp-2 mb-2 text-neutral-900 group-hover:text-primary transition-colors leading-tight">
+                <h3 className="font-bold text-sm line-clamp-1 mb-2 text-neutral-900 group-hover:text-primary transition-colors leading-tight">
                     {title}
                 </h3>
 

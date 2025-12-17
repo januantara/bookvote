@@ -30,6 +30,7 @@ const TopVoted = () => {
                         topVotedBooks?.map((book: TopVotedBook, index: number) => (
                             <CardTopLeaderBoard
                                 key={book.id}
+                                id={book.id}
                                 rank={index + 1}
                                 title={he.decode(book.title)}
                                 author={book.author}

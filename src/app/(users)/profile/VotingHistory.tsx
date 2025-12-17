@@ -30,6 +30,7 @@ export default function VotingHistory({ votedBooks, isLoading }: VotingHistoryPr
             {votedBooks.map((vote) => (
                 <VotedCard
                     key={vote.id}
+                    id={vote.book.id}
                     title={vote.book.title}
                     author={vote.book.author}
                     category={vote.book.category}

@@ -30,14 +30,21 @@ const BookDetails = () => {
     return (
         <div className="max-w-7xl px-6 mx-auto">
 
-            <Link href="/" className="flex gap-x-2 items-center text-primary font-semibold mt-10 hover:opacity-80">
+            <Button
+                variant="link"
+                className="flex gap-x-2 items-center text-primary font-semibold mt-10 hover:opacity-80"
+                onClick={() => router.back()}
+            >
                 <ArrowLeft size={16} />
                 Back to Books
-            </Link>
+            </Button>
 
             <div className="flex flex-col md:flex-row mt-10 gap-8">
 
-                <div className="books-cover flex size-100 p-6 rounded-2xl max-md:w-full bg-teal-500">
+                <div
+                    className="books-cover flex size-100 p-6 rounded-2xl max-md:w-full"
+                    style={{ backgroundColor: book.color || '#d1d5db' }}
+                >
                     <div className="relative m-auto shadow-2xl">
                         <Image
                             src={book.imageUrl}
