@@ -1,6 +1,7 @@
-import { BookCheck, Calendar, ThumbsDown, ThumbsUp } from "lucide-react";
+import { BookCheck, Calendar, ThumbsUp } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import he from "he";
 import { cn } from "@/lib/utils";
 
 interface NewArrivalCardProps {
@@ -10,6 +11,7 @@ interface NewArrivalCardProps {
     imageUrl: string;
     dateAdded: string;
     voted: boolean;
+    color: string;
     isPurchased: boolean;
 }
 
@@ -20,75 +22,70 @@ const VotedCard = ({
     imageUrl,
     dateAdded,
     voted,
+    color,
     isPurchased
-}: NewArrivalCardProps) => {
-    return (
-        <div className="group bg-white border border-neutral-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300">
-            {/* Image Container */}
-            <div className="relative flex overflow-hidden bg-neutral-50 h-56 p-3">
-                <div className="relative w-full h-full rounded-md overflow-hidden bg-teal-500 flex items-center justify-center">
-                    <Image
-                        src={imageUrl}
-                        alt={title}
-                        width={200}
-                        height={200}
-                        className="object-contain max-h-full p-4"
-                    />
-                </div>
-
-                {/* Category Badge */}
-                <div className="absolute top-6 left-6">
-                    <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
-                        {category}
-                    </span>
-                </div>
-
-                {/* Purchased Badge */}
-                {isPurchased && (
-                    <div className="absolute top-6 right-6 bg-primary text-white p-1.5 rounded-full shadow-sm">
-                        <BookCheck size={16} strokeWidth={2.5} />
-                    </div>
-                )}
+}: NewArrivalCardProps) => (
+    <div className="group bg-white border border-neutral-200 rounded-lg overflow-hidden hover:shadow-sm transition-all duration-300">
+        {/* Image Container */}
+        <div className="relative flex overflow-hidden bg-neutral-50 h-62 p-3">
+            <div
+                className="relative w-full h-full rounded-md overflow-hidden flex items-center justify-center p-4"
+                style={{ backgroundColor: color || "#d1d5db" }}
+            >
+                <Image
+                    src={imageUrl}
+                    alt={title}
+                    width={200}
+                    height={200}
+                    className="object-contain max-h-full p-4" />
             </div>
 
-            {/* Content */}
-            <div className="p-5">
-                {/* Date Added */}
-                <div className="flex items-center gap-1.5 text-xs text-neutral-500 mb-3">
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span className="font-medium">{dateAdded}</span>
+            {/* Category Badge */}
+            <div className="absolute top-6 left-6">
+                <span className="bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                    {category}
+                </span>
+            </div>
+
+            {/* Purchased Badge */}
+            {isPurchased && (
+                <div className="absolute top-6 right-6 bg-primary text-white p-1.5 rounded-full shadow-sm">
+                    <BookCheck size={16} strokeWidth={2.5} />
                 </div>
+            )}
+        </div>
 
-                {/* Title */}
-                <h3 className="font-bold text-sm line-clamp-2 mb-2 text-neutral-900 group-hover:text-primary transition-colors leading-tight">
-                    {title}
-                </h3>
+        {/* Content */}
+        <div className="p-5">
+            {/* Date Added */}
+            <div className="flex items-center gap-1.5 text-xs text-neutral-500 mb-3">
+                <Calendar className="w-3.5 h-3.5" />
+                <span className="font-medium">{dateAdded}</span>
+            </div>
 
-                {/* Author */}
-                <p className="text-xs text-neutral-600 mb-4 line-clamp-1">
-                    <span className="font-semibold">{author}</span>
-                </p>
+            {/* Title */}
+            <h3 className="font-bold text-sm line-clamp-1 mb-2 text-neutral-900 group-hover:text-primary transition-colors leading-tight">
+                {he.decode(title)}
+            </h3>
 
-                {/* Action Button */}
+            {/* Author */}
+            <p className="text-xs text-neutral-600 mb-4 line-clamp-1">
+                <span className="font-semibold">{he.decode(author)}</span>
+            </p>
+
+            {/* Action Button */}
+            <div className="flex *:flex-1 gap-2">
                 <Button className={cn(
-                    "w-full text-sm py-3 h-auto font-medium cursor-pointer",
-                    { "bg-white border-primary hover:bg-primary transition-colors duration-300": voted }
+                    "text-sm font-medium cursor-pointer",
+                    { "bg-primary/50": voted }
                 )}>
-                    {voted ? (
-                        <>
-                            Vote
-                            <ThumbsUp className="size-4 inline-block" />
-                        </>
-                    ) : (
-                        <>
-                            Voted
-                            <ThumbsDown className="size-4 inline-block" />
-                        </>
-                    )}
+                    Vote
+                    <ThumbsUp className="size-4 inline-block" />
                 </Button>
+                <Button variant="outline" className="cursor-pointer shadow-none">Detail</Button>
             </div>
-        </div >
-    );
-};
+        </div>
+    </div>
+);
 
 export default VotedCard;

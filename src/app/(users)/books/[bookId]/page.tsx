@@ -91,7 +91,7 @@ const BookLoadingSkeleton = () => (
             <div className="flex flex-1 flex-col items-start">
                 <div className="bg-neutral-200 rounded-full w-1/12 h-5 animate-pulse" />
                 <div className='w-4/12 h-6 mt-6 bg-neutral-200 animate-pulse rounded-full' />
-                <h4 className='mt-4 w-2/12 h-5 bg-neutral-200 animate-pulse rounded-full' />
+                <div className='mt-4 w-2/12 h-5 bg-neutral-200 animate-pulse rounded-full' />
                 <div className="mt-10 w-full space-y-4">
                     <div className='w-full h-4 bg-neutral-200 animate-pulse rounded-full' />
                     <div className='w-full h-4 bg-neutral-200 animate-pulse rounded-full' />
